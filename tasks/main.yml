@@ -34,3 +34,11 @@
       value: mail sent by smarthost; no local mail
       vtype: string
   notify: reload exim4
+
+- name: "exim4 configuration: local interfaces"
+  debconf:
+      name: exim4-config
+      question: exim4/dc_local_interfaces
+      value: "127.0.0.1 ; ::1"
+      vtype: string
+  notify: reload exim4

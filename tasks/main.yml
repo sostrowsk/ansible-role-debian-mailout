@@ -1,2 +1,36 @@
----
-# tasks file for debian-mailout
+- name: exmi4 installed
+  apt:
+      pkg=exim4
+
+- name: passwd.client file installed
+  template:
+    src: passwd.client.j2
+    dest: /etc/exim4/passwd.client
+    owner: root
+    group: Debian-exim
+    mode: 640
+  notify: reload exim4
+
+- name: "exim4 configuration: smarthost"
+  debconf:
+      name: exim4-config
+      question: exim4/dc_smarthost
+      value: "{{ debian_mailout_smarthost_hostname }}::{{ debian_mailout_smarthost_port }}"
+      vtype: string
+  notify: reload exim4
+
+- name: "exim4 configuration: mailname"
+  debconf:
+      name: exim4-config
+      question: exim4/mailname
+      value: "{{ inventory_hostname }}"
+      vtype: string
+  notify: reload exim4
+
+- name: "exim4 configuration: configtype"
+  debconf:
+      name: exim4-config
+      question: exim4/configtype
+      value: mail sent by smarthost; no local mail
+      vtype: string
+  notify: reload exim4

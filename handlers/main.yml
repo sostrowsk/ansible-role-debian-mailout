@@ -1,2 +1,4 @@
 ---
-# handlers file for debian-mailout
+- name: reload exim4
+  service: exim4
+    state: reloaded

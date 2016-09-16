@@ -1,4 +1,5 @@
 ---
 - name: reload exim4
-  service: exim4
+  service:
+    name: exim4
     state: reloaded

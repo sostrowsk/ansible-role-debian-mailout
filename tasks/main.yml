@@ -8,7 +8,7 @@
     dest: /etc/exim4/passwd.client
     owner: root
     group: Debian-exim
-    mode: 640
+    mode: 0640
   notify: reload exim4
 
 - name: "exim4 configuration: smarthost"

@@ -1,2 +1,2 @@
 ---
-# defaults file for debian-mailout
+debian_mailout_catchall_recipient: rene@fleschenberg.net

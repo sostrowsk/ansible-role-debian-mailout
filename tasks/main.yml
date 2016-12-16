@@ -64,6 +64,16 @@
 - name: update-exim4.conf
   command: update-exim4.conf
 
+- name: exim4 Catchall recipient
+  blockinfile:
+    dest: /etc/exim4/exim4.conf.template
+    block: |
+      catchall_pub:
+        driver = redirect
+        domains = {{ inventory_hostname }}
+        data = {{ debian_mailout_catchall_recipient }}
+    insertafter: "^begin routers$"
+
 - name: reload exim4
   service:
     name: exim4

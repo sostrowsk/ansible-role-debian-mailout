@@ -1,5 +1,5 @@
 ---
-- name: reload exim4
+- name: Restart postfix
   service:
-    name: exim4
-    state: reloaded
+    name: postfix
+    state: restarted

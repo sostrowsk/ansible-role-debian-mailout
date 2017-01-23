@@ -1,9 +1,11 @@
-- name: ssmtp installed
+- name: postfix installed
   apt:
-      pkg=ssmtp
+    pkg: postfix
+    state: installed
 
-- name: ssmtp.conf installed
-  template:
-    src: ssmtp.conf.j2
-    dest: /etc/ssmtp/ssmtp.conf
-    mode: 0640
+- name: postfix configured to listen only on loopback interface
+  lineinfile:
+    line: "inet_interfaces = loopback-only"
+    regexp: "^inet_interfaces ="
+  notify: Restart postfix
+

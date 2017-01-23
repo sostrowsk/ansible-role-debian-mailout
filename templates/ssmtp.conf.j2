@@ -1,0 +1,17 @@
+root={{ debian_mailout_root_email }}
+
+mailhub={{ debian_mailout_smarthost_hostname }}
+
+rewriteDomain=
+
+hostname={{ ansible_inventory_hostname }}
+
+FromLineOverride=YES
+
+AuthUser={{ debian_mailout_smarthost_username }}
+AuthPass={{ debian_mailout_smarthost_password }}
+
+UseTLS=YES
+UseSTARTTLS=YES
+AuthMethod=LOGIN
+mailhub={{ debian_mailout_smarthost_hostname }}:{{ debian_mailout_smarthost_port }}

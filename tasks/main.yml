@@ -7,5 +7,6 @@
   lineinfile:
     line: "inet_interfaces = loopback-only"
     regexp: "^inet_interfaces ="
+    dest: /etc/postfix/main.cf
   notify: Restart postfix
 

@@ -4,7 +4,7 @@ mailhub={{ debian_mailout_smarthost_hostname }}
 
 rewriteDomain=
 
-hostname={{ debian_mailout_hostname|default:inventory_hostname }}
+hostname={{ debian_mailout_hostname|default(inventory_hostname) }}
 
 FromLineOverride=YES
 

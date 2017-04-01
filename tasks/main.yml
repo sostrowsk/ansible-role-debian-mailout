@@ -10,3 +10,9 @@
     dest: /etc/postfix/main.cf
   notify: Restart postfix
 
+- name: mydestination (only localhost)
+  lineinfile:
+    line: "mydestination = localhost"
+    regexp: "^mydestination ="
+    dest: /etc/postfix/main.cf
+  notify: Restart postfix

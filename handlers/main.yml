@@ -3,3 +3,6 @@
   service:
     name: postfix
     state: restarted
+
+- name: postmap relay_passwd
+  command: postmap /etc/postfix/relay_passwd

@@ -12,7 +12,7 @@
 
 - name: Remove existing relayhost line
   lineinfile:
-    regexp: "^relayhost =$"
+    regexp: "^relayhost = $"
     dest: /etc/postfix/main.cf
     state: absent
   when: "{{ debian_mailout_use_smarthost }}"

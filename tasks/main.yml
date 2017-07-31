@@ -15,7 +15,7 @@
     regexp: "^relayhost = $"
     dest: /etc/postfix/main.cf
     state: absent
-  when: {{ debian_mailout_use_smarthost }}
+  when: debian_mailout_use_smarthost
   notify: Restart postfix
 
 - name: relayhost
@@ -27,7 +27,7 @@
       relayhost = [{{ debian_mailout_smarthost_hostname }}]:{{ debian_mailout_smarthost_port }}
       smtp_sasl_password_maps =  hash:/etc/postfix/relay_passwd
     dest: /etc/postfix/main.cf
-  when: {{ debian_mailout_use_smarthost }}
+  when: debian_mailout_use_smarthost
   notify: Restart postfix
 
 - name: relay_passwd
@@ -40,7 +40,7 @@
   notify:
   - postmap relay_passwd
   - Restart postfix
-  when: {{ debian_mailout_use_smarthost }}
+  when: debian_mailout_use_smarthost
 
 - name: mydestination
   lineinfile:

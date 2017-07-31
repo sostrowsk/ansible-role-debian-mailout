@@ -10,6 +10,13 @@
     dest: /etc/postfix/main.cf
   notify: Restart postfix
 
+- name: Remove existing relayhost line
+  lineinfile:
+    regexp: "^relayhost ="
+    dest: /etc/postfix/main.cf
+    state: absent
+  notify: Restart postfix
+
 - name: relayhost
   blockinfile:
     block: |
@@ -29,6 +36,14 @@
     mode: 0600
     owner: root
     group: root
-  notify: Restart postfix
+  notify:
+  - postmap relay_passwd
+  - Restart postfix
   when: "{{ debian_mailout_use_smarthost }}"
-  notify: postmap relay_passwd
+
+- name: mydestination (only localhost)
+  lineinfile:
+    line: "mydestination = localhost {{ inventory_hostname }}"
+    regexp: "^mydestination ="
+    dest: /etc/postfix/main.cf
+  notify: Restart postfix

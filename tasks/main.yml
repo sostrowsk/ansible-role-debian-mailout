@@ -12,9 +12,10 @@
 
 - name: Remove existing relayhost line
   lineinfile:
-    regexp: "^relayhost ="
+    regexp: "^relayhost =$"
     dest: /etc/postfix/main.cf
     state: absent
+  when: "{{ debian_mailout_use_smarthost }}"
   notify: Restart postfix
 
 - name: relayhost
@@ -41,9 +42,9 @@
   - Restart postfix
   when: "{{ debian_mailout_use_smarthost }}"
 
-- name: mydestination (only localhost)
+- name: mydestination
   lineinfile:
-    line: "mydestination = localhost {{ inventory_hostname }}"
+    line: "mydestination = localhost {{ inventory_hostname }} {{ inventory_hostname_short }}"
     regexp: "^mydestination ="
     dest: /etc/postfix/main.cf
   notify: Restart postfix

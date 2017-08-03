@@ -1,1 +1,2 @@
 ---
+debian_mailout_use_smarthost: false

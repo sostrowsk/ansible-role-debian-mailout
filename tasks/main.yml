@@ -42,9 +42,9 @@
   - Restart postfix
   when: debian_mailout_use_smarthost
 
-- name: mydestination
+- name: mydestination (only localhost)
   lineinfile:
-    line: "mydestination = localhost {{ inventory_hostname }} {{ inventory_hostname_short }}"
+    line: "mydestination = localhost"
     regexp: "^mydestination ="
     dest: /etc/postfix/main.cf
   notify: Restart postfix
